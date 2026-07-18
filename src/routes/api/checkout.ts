@@ -5,14 +5,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16' as any,
 });
 
-export const Route = createAPIFileRoute('/api/checkout')({
+// Changed from Route to APIRoute to match the framework's updated breaking changes
+export const APIRoute = createAPIFileRoute('/api/checkout')({
   POST: async ({ request }) => {
     try {
       const { cartItems } = await request.json();
 
       const lineItems = cartItems.map((item: any) => {
-        // Safely extract price based on your CartItem interface variants structure
-        let basePrice = 1199; // Default 8 oz
+        let basePrice = 1199; 
         if (item.variants?.size === '16 oz') basePrice = 1899;
         if (item.variants?.size === '32 oz') basePrice = 2999;
 
