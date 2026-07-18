@@ -361,13 +361,9 @@ function HeroSection() {
                 {/* Main hero image */}
                 <div className="aspect-square rounded-2xl overflow-hidden ring-2 ring-accent-gold/30 bg-base-slate shadow-2xl">
                   <img
-                    src="/Gemini_Generated_Image__(1).png"
+                    src={nkor1.url}
                     alt="Nkor Eats — Authentic Shito Sauce"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        'https://images.pexels.com/photos/4199098/pexels-photo-4199098.jpeg?auto=compress&cs=tinysrgb&w=800';
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-base-black/40 via-transparent to-transparent" />
                   {/* Kente top stripe on hero image */}
@@ -381,25 +377,17 @@ function HeroSection() {
                 {/* Floating card — food plate */}
                 <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-xl overflow-hidden ring-2 ring-accent-gold/40 shadow-xl hidden sm:block">
                   <img
-                    src="/Gemini_Generated_Image__(3).png"
+                    src={nkor3.url}
                     alt="Banku and fish with Nkor Shito"
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=300';
-                    }}
                   />
                 </div>
                 {/* Floating card — open jar */}
                 <div className="absolute -top-4 -right-4 w-28 h-28 rounded-xl overflow-hidden ring-2 ring-accent-orange/40 shadow-xl hidden sm:block">
                   <img
-                    src="/Gemini_Generated_Image__(2).png"
+                    src={nkor2.url}
                     alt="Nkor Spicy Shito Sauce"
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src =
-                        'https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&w=300';
-                    }}
                   />
                 </div>
               </div>
@@ -807,13 +795,9 @@ function HeritageSection() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden ring-2 ring-accent-gold/30 shadow-2xl">
                 <img
-                  src="/Gemini_Generated_Image_45qkkf45qkkf45qk.png"
+                  src={nkor4.url}
                   alt="Nkor Shito Sauce Halal Beef with Ghanaian waakye and fried fish"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      'https://images.pexels.com/photos/5490192/pexels-photo-5490192.jpeg?auto=compress&cs=tinysrgb&w=800';
-                  }}
                 />
                 {/* Kente overlay on image */}
                 <div className="absolute top-0 left-0 right-0 h-2 flex">
@@ -825,13 +809,9 @@ function HeritageSection() {
               {/* Floating inset */}
               <div className="absolute -bottom-6 -right-6 w-44 h-44 rounded-2xl overflow-hidden ring-2 ring-accent-orange/30 shadow-2xl hidden lg:block">
                 <img
-                  src="/Gemini_Generated_Image__(3).png"
+                  src={nkor3.url}
                   alt="Banku with fish, shrimp and Nkor Shito"
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      'https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&w=400';
-                  }}
                 />
               </div>
               <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-gradient-to-br from-accent-orange/15 via-accent-gold/10 to-structural-green/10 rounded-full blur-3xl" />
