@@ -645,8 +645,36 @@ function CartDrawer({
   onUpdateQuantity: (id: string, qty: number) => void;
   onRemove: (id: string) => void;
 }) {
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const subtotal = cart.reduce((s, item) => s + item.price * item.quantity, 0);
+
+  const handleCheckout = async () => {
+    if (cart.length === 0) return;
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartItems: cart }),
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url; // Dynamic redirect straight to Stripe
+      } else {
+        console.error('Checkout error:', data.error);
+        setErrorMessage(data.error || 'Failed to initiate checkout.');
+        setIsSubmitting(false);
+      }
+    } catch (err) {
+      console.error('Network error during checkout:', err);
+      setErrorMessage('A network error occurred. Please try again.');
+      setIsSubmitting(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -660,7 +688,7 @@ function CartDrawer({
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-structural-border">
           <h2 className="text-lg font-bold text-white uppercase tracking-wide">Your Basket</h2>
-          <button onClick={onClose} className="p-2 text-gray-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="p-2 text-gray-400 hover:text-white transition-colors" disabled={isSubmitting}>
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -696,7 +724,7 @@ function CartDrawer({
                   <div className="flex items-center mt-2 gap-2">
                     <button
                       onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-                      disabled={item.quantity <= 1}
+                      disabled={item.quantity <= 1 || isSubmitting}
                       className="w-6 h-6 flex items-center justify-center bg-base-slate hover:bg-structural-border disabled:opacity-40 rounded-md transition-colors"
                     >
                       <Minus className="w-3 h-3 text-white" />
@@ -704,12 +732,14 @@ function CartDrawer({
                     <span className="w-5 text-center text-white font-bold text-sm">{item.quantity}</span>
                     <button
                       onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                      disabled={isSubmitting}
                       className="w-6 h-6 flex items-center justify-center bg-base-slate hover:bg-structural-border rounded-md transition-colors"
                     >
                       <Plus className="w-3 h-3 text-white" />
                     </button>
                     <button
                       onClick={() => onRemove(item.id)}
+                      disabled={isSubmitting}
                       className="ml-auto p-1 text-gray-500 hover:text-accent-orange transition-colors"
                     >
                       <X className="w-3.5 h-3.5" />
@@ -728,47 +758,23 @@ function CartDrawer({
               <span className="text-gray-400 uppercase tracking-wide text-sm font-semibold">Subtotal</span>
               <span className="text-white font-extrabold text-xl">${subtotal.toFixed(2)}</span>
             </div>
+            
+            {errorMessage && (
+              <p className="text-xs text-accent-orange text-center font-medium bg-accent-orange/10 p-2 rounded-lg">
+                {errorMessage}
+              </p>
+            )}
+
             <button
-              onClick={() => setShowCheckout(true)}
-              className="bg-accent-gold text-base-black hover:bg-white w-full py-3.5 rounded-xl font-bold uppercase tracking-wider transition-colors shadow-lg text-sm"
+              onClick={handleCheckout}
+              disabled={isSubmitting}
+              className="bg-accent-gold text-base-black hover:bg-white disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed w-full py-3.5 rounded-xl font-bold uppercase tracking-wider transition-colors shadow-lg text-sm flex items-center justify-center gap-2"
             >
-              Proceed to Checkout
+              {isSubmitting ? 'Connecting to Stripe...' : 'Proceed to Checkout'}
             </button>
           </div>
         )}
       </div>
-
-      {/* Checkout modal */}
-      {showCheckout && (
-        <div className="fixed inset-0 flex items-center justify-center z-[60] p-4">
-          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowCheckout(false)} />
-          <div className="relative bg-base-slate rounded-2xl p-8 max-w-md w-full animate-scale-in shadow-2xl ring-1 ring-structural-border overflow-hidden">
-            <KenteStripe />
-            <div className="pt-6 text-center">
-              <button onClick={() => setShowCheckout(false)} className="absolute top-10 right-4 p-2 text-gray-400 hover:text-white transition-colors">
-                <X className="w-5 h-5" />
-              </button>
-              <div className="w-20 h-20 bg-structural-green/20 rounded-full flex items-center justify-center mx-auto mb-5">
-                <Sparkles className="w-10 h-10 text-structural-green" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Medaase!</h3>
-              <p className="text-gray-400 text-sm mb-1">Thank you for your order</p>
-              <p className="text-gray-400 mb-2">
-                Total: <span className="text-accent-gold font-bold text-xl">${subtotal.toFixed(2)}</span>
-              </p>
-              <p className="text-xs text-gray-600 mt-3 px-4">
-                This storefront is fully wired for payment integration.
-              </p>
-              <button
-                onClick={() => { setShowCheckout(false); onClose(); }}
-                className="mt-6 w-full bg-accent-orange hover:bg-accent-gold hover:text-base-black text-white py-3.5 rounded-xl font-bold uppercase tracking-wider transition-colors"
-              >
-                Continue Shopping
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
