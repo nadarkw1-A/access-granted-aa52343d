@@ -364,7 +364,7 @@ function HeroSection() {
                 {/* Main hero image */}
                 <div className="aspect-square rounded-2xl overflow-hidden ring-2 ring-accent-gold/30 bg-base-slate shadow-2xl">
                   <img
-                    src={nkor1.url}
+                    src="/nkor_Eats_Halal Beef_.png"
                     alt="Nkor Eats — Authentic Shito Sauce"
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
@@ -380,7 +380,7 @@ function HeroSection() {
                 {/* Floating card — food plate */}
                 <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-xl overflow-hidden ring-2 ring-accent-gold/40 shadow-xl hidden sm:block">
                   <img
-                    src={nkor3.url}
+                    src="/Food_1.png"
                     alt="Banku and fish with Nkor Shito"
                     className="w-full h-full object-cover"
                   />
@@ -388,7 +388,7 @@ function HeroSection() {
                 {/* Floating card — open jar */}
                 <div className="absolute -top-4 -right-4 w-28 h-28 rounded-xl overflow-hidden ring-2 ring-accent-orange/40 shadow-xl hidden sm:block">
                   <img
-                    src={nkor2.url}
+                    src="/Pour_1.png"
                     alt="Nkor Spicy Shito Sauce"
                     className="w-full h-full object-cover"
                   />
@@ -406,7 +406,6 @@ function HeroSection() {
     </section>
   );
 }
-
 // ============================================================================
 // SPICE HEAT INDICATOR
 // ============================================================================
