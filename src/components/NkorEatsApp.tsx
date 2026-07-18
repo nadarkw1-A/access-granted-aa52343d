@@ -16,6 +16,8 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
+import { StripeCartCheckout } from '@/components/StripeEmbeddedCheckout';
+import { PaymentTestModeBanner } from '@/components/PaymentTestModeBanner';
 
 
 
