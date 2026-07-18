@@ -16,6 +16,14 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
+import nkor1 from '@/assets/nkor-1.png.asset.json';
+import nkor2 from '@/assets/nkor-2.png.asset.json';
+import nkor3 from '@/assets/nkor-3.png.asset.json';
+import nkor4 from '@/assets/nkor-45qkkf45qkkf45qk.png.asset.json';
+
+const productImages = [nkor3.url, nkor2.url, nkor1.url, nkor4.url];
+const pickImg = (i: number) => productImages[i % productImages.length];
+
 
 // ============================================================================
 // TYPES
@@ -91,7 +99,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Pepper Free',
     spiceRating: 0,
     description: 'All the rich, savory umami of traditional Ghanaian Shito without any heat. Slow-simmered with smoked crayfish and native aromatics — deep flavor, zero fire. Great for the whole family.',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(0),
     badge: 'Family Friendly',
     pairsWith: 'Waakye, Boiled Yam, Kelewele',
   },
@@ -102,7 +110,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Mild',
     spiceRating: 2,
     description: 'A gentle, aromatic entry into Ghanaian Shito. Subtle Scotch bonnet warmth layered with dried herrings, crayfish, and native spices. The everyday crowd-pleaser.',
-    image: 'https://images.pexels.com/photos/4199098/pexels-photo-4199098.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(1),
     badge: 'Best Seller',
     pairsWith: 'Banku, Fried Tilapia, Kenkey',
   },
@@ -113,7 +121,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Spicy',
     spiceRating: 4,
     description: 'The real Shito experience. Bold Scotch bonnet fire, rich umami from smoked herring and crayfish, slow-simmered to legendary depth. This is Ghana in a jar.',
-    image: 'https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(2),
     badge: 'Authentic',
     pairsWith: 'Fufu, Light Soup, Jollof Rice',
   },
@@ -124,7 +132,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Very Hot',
     spiceRating: 5,
     description: 'For the true pepper warriors. Double Scotch bonnet with ghost pepper heat, anchored by the signature Nkor umami base. Wɔ ho hia aduro! A Ghanaian rite of passage.',
-    image: 'https://images.pexels.com/photos/5490192/pexels-photo-5490192.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(3),
     badge: 'Ferocious',
     pairsWith: 'Grilled Tilapia, Banku, Fried Plantain',
   },
@@ -135,7 +143,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Crab & Shrimp',
     spiceRating: 3,
     description: 'A coastal West African specialty — whole blue crab and wild-caught Atlantic shrimp slow-simmered with traditional Shito aromatics. Ocean depth meets Ghanaian fire.',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(4),
     badge: 'Coastal Edition',
     pairsWith: 'Fried Yam, Boiled Cassava, Kenkey',
   },
@@ -146,7 +154,7 @@ const shitoProducts: ShitoProduct[] = [
     spiceLevelDisplay: 'Tilapia Reserve',
     spiceRating: 3,
     description: 'Crafted exclusively with whole smoked Volta River tilapia — a Ghanaian staple elevated. Rich, smoky, deeply savory. The heritage sauce of the North. Medaase.',
-    image: 'https://images.pexels.com/photos/4199098/pexels-photo-4199098.jpeg?auto=compress&cs=tinysrgb&w=600',
+    image: pickImg(5),
     badge: 'Heritage Reserve',
     pairsWith: 'Tuo Zaafi, Kontomire Stew, Ampesi',
   },
