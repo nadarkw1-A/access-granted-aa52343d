@@ -797,7 +797,7 @@ function HeritageSection() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden ring-2 ring-accent-gold/30 shadow-2xl">
                 <img
-                  src={nkor4.url}
+                  src="/nkor_eats_halal_chicken.png"
                   alt="Nkor Shito Sauce Halal Beef with Ghanaian waakye and fried fish"
                   className="w-full h-full object-cover"
                 />
@@ -811,7 +811,7 @@ function HeritageSection() {
               {/* Floating inset */}
               <div className="absolute -bottom-6 -right-6 w-44 h-44 rounded-2xl overflow-hidden ring-2 ring-accent-orange/30 shadow-2xl hidden lg:block">
                 <img
-                  src={nkor3.url}
+                  src="/Food_2.png"
                   alt="Banku with fish, shrimp and Nkor Shito"
                   className="w-full h-full object-cover"
                 />
