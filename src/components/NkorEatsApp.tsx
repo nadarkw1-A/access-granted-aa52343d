@@ -17,12 +17,16 @@ import {
   Sparkles,
 } from 'lucide-react';
 const productImages = [
-  '/nkor_Eats_Halal Beef_.png',
+  '/nkor_eats_halal beef.png',
   '/nkor_eats_halal_chicken.png',
-  '/Food_1.png',
-  '/Food_2.png',
-  '/Pour_1.png',
-  '/PIC_Hold.png'
+  '/food_1.png',
+  '/food_2.png',
+  'pepper_free.png'
+  '/pour_1.png',
+  '/pic_hold.png',
+  '/nkor_mild.png',
+  '/nkor_spicy.png',
+  '/nkor_veryhot.png'
 ];
 
 const pickImg = (i: number) => productImages[i % productImages.length];
