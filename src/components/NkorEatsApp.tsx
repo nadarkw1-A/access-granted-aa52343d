@@ -31,7 +31,7 @@ const pickImg = (i: number) => productImages[i % productImages.length];
 
 type SizeVariant = '8 oz' | '16 oz' | '32 oz';
 type ProteinVariant = 'Plain (No Meat)' | 'Halal Beef' | 'Chicken';
-type SpiceLevel = 'pepper-free' | 'mild' | 'spicy' | 'very-hot' | 'crab-shrimp' | 'tilapia';
+type SpiceLevel = 'pepper-free' | 'mild' | 'spicy' | 'very-hot' | 'halal-chicken' | 'halal-beef';
 
 interface ShitoProduct {
   id: string;
@@ -137,25 +137,25 @@ const shitoProducts: ShitoProduct[] = [
     pairsWith: 'Grilled Tilapia, Banku, Fried Plantain',
   },
   {
-    id: 'shito-crab-shrimp',
-    name: 'Nkor Shito Sauce - Crab & Shrimp',
-    spiceLevel: 'crab-shrimp',
-    spiceLevelDisplay: 'Crab & Shrimp',
+    id: 'shito-halal-chicken',
+    name: 'Nkor Shito Sauce - Halal Chicken',
+    spiceLevel: 'halal-chicken',
+    spiceLevelDisplay: 'Halal Chicken',
     spiceRating: 3,
-    description: 'A coastal West African specialty — whole blue crab and wild-caught Atlantic shrimp slow-simmered with traditional Shito aromatics. Ocean depth meets Ghanaian fire.',
+    description: 'Tender halal chicken slow-simmered in our signature Shito base with Scotch bonnet warmth and native aromatics. A comforting, protein-rich take on Ghanaian tradition.',
     image: pickImg(4),
-    badge: 'Coastal Edition',
+    badge: 'Halal Certified',
     pairsWith: 'Fried Yam, Boiled Cassava, Kenkey',
   },
   {
-    id: 'shito-tilapia',
-    name: 'Nkor Shito Sauce - Tilapia Reserve',
-    spiceLevel: 'tilapia',
-    spiceLevelDisplay: 'Tilapia Reserve',
+    id: 'shito-halal-beef',
+    name: 'Nkor Shito Sauce - Halal Beef',
+    spiceLevel: 'halal-beef',
+    spiceLevelDisplay: 'Halal Beef',
     spiceRating: 3,
-    description: 'Crafted exclusively with whole smoked Volta River tilapia — a Ghanaian staple elevated. Rich, smoky, deeply savory. The heritage sauce of the North. Medaase.',
+    description: 'Premium halal beef slow-cooked into our rich Shito base until deeply savory and smoky. A hearty, heritage-inspired sauce that brings Ghanaian soul to every bite.',
     image: pickImg(5),
-    badge: 'Heritage Reserve',
+    badge: 'Heritage Beef',
     pairsWith: 'Tuo Zaafi, Kontomire Stew, Ampesi',
   },
 ];
