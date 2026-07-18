@@ -48,7 +48,6 @@ export const createCartCheckout = createServerFn({ method: "POST" })
         ui_mode: "embedded_page",
         return_url: data.returnUrl,
         shipping_address_collection: { allowed_countries: ["US"] },
-        automatic_tax: { enabled: true },
       });
       return { clientSecret: session.client_secret ?? "" };
     } catch (error) {
