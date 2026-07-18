@@ -654,15 +654,13 @@ function CartDrawer({
     setIsSubmitting(true);
     setErrorMessage(null);
     
-    try {
-      // Changed from '/api/checkout' to 'api/checkout' (without the leading slash)
-      // to prevent framework base-path routing issues
-      const response = await fetch('api/checkout', {
+  try {
+      // Must have the leading slash '/' to target the root API directory correctly
+      const response = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems: cart }),
       });
-
       const data = await response.json();
       if (data.url) {
         window.location.href = data.url; 
