@@ -1057,7 +1057,7 @@ function Footer() {
 // APP
 // ============================================================================
 
-export default function App() {
+export default function NkorEatsApp() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
