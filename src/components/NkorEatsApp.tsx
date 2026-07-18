@@ -649,34 +649,23 @@ function CartDrawer({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showCheckout, setShowCheckout] = useState(false);
   const subtotal = cart.reduce((s, item) => s + item.price * item.quantity, 0);
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (cart.length === 0) return;
-    setIsSubmitting(true);
     setErrorMessage(null);
-    
-  try {
-      // Must have the leading slash '/' to target the root API directory correctly
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cartItems: cart }),
-      });
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url; 
-      } else {
-        console.error('Checkout error:', data.error);
-        setErrorMessage(data.error || 'Failed to initiate checkout.');
-        setIsSubmitting(false);
-      }
-    } catch (err) {
-      console.error('Network error during checkout:', err);
-      setErrorMessage('A network error occurred. Please try again.');
-      setIsSubmitting(false);
-    }
+    setIsSubmitting(true);
+    setShowCheckout(true);
   };
+
+  const checkoutLines = cart.map((item) => ({
+    productName: item.product.name,
+    size: item.variants.size,
+    protein: item.variants.protein,
+    unitPriceCents: Math.round(item.price * 100),
+    quantity: item.quantity,
+  }));
 
   if (!isOpen) return null;
 
