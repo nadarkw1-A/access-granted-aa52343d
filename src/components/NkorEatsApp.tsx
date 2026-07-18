@@ -384,7 +384,7 @@ function HeroSection() {
                 {/* Floating card — food plate */}
                 <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-xl overflow-hidden ring-2 ring-accent-gold/40 shadow-xl hidden sm:block">
                   <img
-                    src="/Food_1.png"
+                    src="/food_1.png"
                     alt="Banku and fish with Nkor Shito"
                     className="w-full h-full object-cover"
                   />
