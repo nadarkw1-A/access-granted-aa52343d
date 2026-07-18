@@ -392,7 +392,7 @@ function HeroSection() {
                 {/* Floating card — open jar */}
                 <div className="absolute -top-4 -right-4 w-28 h-28 rounded-xl overflow-hidden ring-2 ring-accent-orange/40 shadow-xl hidden sm:block">
                   <img
-                    src="/Pour_1.png"
+                    src="/pour_1.png"
                     alt="Nkor Spicy Shito Sauce"
                     className="w-full h-full object-cover"
                   />
