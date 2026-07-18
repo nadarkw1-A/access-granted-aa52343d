@@ -766,6 +766,24 @@ function CartDrawer({
           </div>
         )}
       </div>
+
+      {showCheckout && (
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-start sm:items-center justify-center overflow-y-auto p-2 sm:p-6">
+          <div className="bg-white rounded-2xl w-full max-w-3xl relative my-4">
+            <button
+              onClick={() => { setShowCheckout(false); setIsSubmitting(false); }}
+              className="absolute -top-2 -right-2 sm:top-3 sm:right-3 z-10 p-2 bg-base-black text-white rounded-full shadow-lg hover:bg-accent-orange transition-colors"
+              aria-label="Close checkout"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <StripeCartCheckout
+              cartItems={checkoutLines}
+              returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
