@@ -16,6 +16,8 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
+import { StripeCartCheckout } from '@/components/StripeEmbeddedCheckout';
+import { PaymentTestModeBanner } from '@/components/PaymentTestModeBanner';
 
 
 
@@ -647,34 +649,23 @@ function CartDrawer({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showCheckout, setShowCheckout] = useState(false);
   const subtotal = cart.reduce((s, item) => s + item.price * item.quantity, 0);
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (cart.length === 0) return;
-    setIsSubmitting(true);
     setErrorMessage(null);
-    
-  try {
-      // Must have the leading slash '/' to target the root API directory correctly
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cartItems: cart }),
-      });
-      const data = await response.json();
-      if (data.url) {
-        window.location.href = data.url; 
-      } else {
-        console.error('Checkout error:', data.error);
-        setErrorMessage(data.error || 'Failed to initiate checkout.');
-        setIsSubmitting(false);
-      }
-    } catch (err) {
-      console.error('Network error during checkout:', err);
-      setErrorMessage('A network error occurred. Please try again.');
-      setIsSubmitting(false);
-    }
+    setIsSubmitting(true);
+    setShowCheckout(true);
   };
+
+  const checkoutLines = cart.map((item) => ({
+    productName: item.product.name,
+    size: item.variants.size,
+    protein: item.variants.protein,
+    unitPriceCents: Math.round(item.price * 100),
+    quantity: item.quantity,
+  }));
 
   if (!isOpen) return null;
 
@@ -775,6 +766,24 @@ function CartDrawer({
           </div>
         )}
       </div>
+
+      {showCheckout && (
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-start sm:items-center justify-center overflow-y-auto p-2 sm:p-6">
+          <div className="bg-white rounded-2xl w-full max-w-3xl relative my-4">
+            <button
+              onClick={() => { setShowCheckout(false); setIsSubmitting(false); }}
+              className="absolute -top-2 -right-2 sm:top-3 sm:right-3 z-10 p-2 bg-base-black text-white rounded-full shadow-lg hover:bg-accent-orange transition-colors"
+              aria-label="Close checkout"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <StripeCartCheckout
+              cartItems={checkoutLines}
+              returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
@@ -1075,6 +1084,7 @@ export default function NkorEatsApp() {
 
   return (
     <div className="min-h-screen bg-base-black" style={{ backgroundColor: '#0B0C10' }}>
+      <PaymentTestModeBanner />
       <Navigation
         cartCount={cartCount}
         cartTotal={cartTotal}
