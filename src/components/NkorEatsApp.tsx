@@ -16,7 +16,7 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
-import { StripeCartCheckout } from '@/components/StripeEmbeddedCheckout';
+
 import { PaymentTestModeBanner } from '@/components/PaymentTestModeBanner';
 
 
@@ -649,23 +649,19 @@ function CartDrawer({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [showCheckout, setShowCheckout] = useState(false);
   const subtotal = cart.reduce((s, item) => s + item.price * item.quantity, 0);
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
+    const shopifyUrl = import.meta.env.VITE_SHOPIFY_CHECKOUT_URL as string | undefined;
+    if (!shopifyUrl) {
+      setErrorMessage('Checkout is not configured yet. Please add your Shopify checkout URL.');
+      return;
+    }
     setErrorMessage(null);
     setIsSubmitting(true);
-    setShowCheckout(true);
+    window.location.href = shopifyUrl;
   };
-
-  const checkoutLines = cart.map((item) => ({
-    productName: item.product.name,
-    size: item.variants.size,
-    protein: item.variants.protein,
-    unitPriceCents: Math.round(item.price * 100),
-    quantity: item.quantity,
-  }));
 
   if (!isOpen) return null;
 
@@ -761,29 +757,11 @@ function CartDrawer({
               disabled={isSubmitting}
               className="bg-accent-gold text-base-black hover:bg-white disabled:bg-gray-600 disabled:text-gray-400 disabled:cursor-not-allowed w-full py-3.5 rounded-xl font-bold uppercase tracking-wider transition-colors shadow-lg text-sm flex items-center justify-center gap-2"
             >
-              {isSubmitting ? 'Connecting to Stripe...' : 'Proceed to Checkout'}
+              {isSubmitting ? 'Redirecting…' : 'Proceed to Checkout'}
             </button>
           </div>
         )}
       </div>
-
-      {showCheckout && (
-        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-start sm:items-center justify-center overflow-y-auto p-2 sm:p-6">
-          <div className="bg-white rounded-2xl w-full max-w-3xl relative my-4">
-            <button
-              onClick={() => { setShowCheckout(false); setIsSubmitting(false); }}
-              className="absolute -top-2 -right-2 sm:top-3 sm:right-3 z-10 p-2 bg-base-black text-white rounded-full shadow-lg hover:bg-accent-orange transition-colors"
-              aria-label="Close checkout"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <StripeCartCheckout
-              cartItems={checkoutLines}
-              returnUrl={`${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}`}
-            />
-          </div>
-        </div>
-      )}
     </>
   );
 }
