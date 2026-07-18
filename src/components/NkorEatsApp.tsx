@@ -911,7 +911,7 @@ function ContactSection() {
             Connect With Us
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-sm">
-            Questions about Nkor Shito? Wholesale enquiries? We'd love to hear from you — Medaase!
+            Questions about Nkor Shito? Wholesale enquiries? We'd love to hear from you  Medaase!
           </p>
         </div>
 
@@ -919,9 +919,9 @@ function ContactSection() {
           <div className="space-y-6">
             <h3 className="text-lg font-bold text-white uppercase tracking-wide">Contact Information</h3>
             {[
-              { Icon: Mail, label: 'Email', value: 'hello@nkoreats.com', href: 'mailto:hello@nkoreats.com' },
-              { Icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-              { Icon: MapPin, label: 'Location', value: 'Atlanta, Georgia, USA', href: undefined },
+              { Icon: Mail, label: 'Email', value: 'nkoreats@gmail.com', href: 'mailto:hello@nkoreats.com' },
+              { Icon: Phone, label: 'Phone', value: '+1 (443) 528-3976', href: 'tel:+14435283976' },
+              { Icon: MapPin, label: 'Location', value: 'Belcamp, Maryland, USA', href: undefined },
             ].map(({ Icon, label, value, href }) => (
               <div key={label} className="flex items-start space-x-4">
                 <div className="w-11 h-11 bg-accent-orange/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -945,7 +945,7 @@ function ContactSection() {
                 <div className="w-20 h-20 bg-structural-green/20 rounded-full flex items-center justify-center mx-auto mb-5">
                   <Check className="w-10 h-10 text-structural-green" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">Medaase — Thank You!</h3>
+                <h3 className="text-xl font-bold text-white mb-2">Medaase  Thank You!</h3>
                 <p className="text-gray-400 text-sm">We'll be in touch shortly.</p>
               </div>
             ) : (
