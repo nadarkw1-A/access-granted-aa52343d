@@ -58,14 +58,14 @@ interface CartItem {
 
 const SIZE_BASE_PRICES: Record<SizeVariant, number> = {
   '8 oz': 11.99,
-  '16 oz': 18.99,
-  '32 oz': 31.99,
+  '16 oz': 19.99,
+  '32 oz': 37.99,
 };
 
 const PROTEIN_ADDONS: Record<SizeVariant, number> = {
-  '8 oz': 1.50,
-  '16 oz': 2.50,
-  '32 oz': 3.50,
+  '8 oz': 2.50,
+  '16 oz': 3.50,
+  '32 oz': 5.50,
 };
 
 function calculatePrice(size: SizeVariant, protein: ProteinVariant): number {
