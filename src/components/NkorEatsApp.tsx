@@ -825,7 +825,7 @@ function HeritageSection() {
                   Born from the kitchens of Ghana, Nkor Shito Sauce carries the soul of Accra's markets and the discipline of ancestral slow-cooking. Every jar begins with premium smoked herrings, wild crayfish, Scotch bonnet peppers, and native aromatics — simmered low and slow until the oil runs deep and dark.
                 </p>
                 <p>
-                  We honor the elders who perfected this method before us. From waakye stands in Kumasi to jollof tables in Takoradi — Shito has always been there. Now Nkor brings it to your doorstep, never compromising, never cutting corners.
+                  We honor the elders who perfected this method before us. From waakye stands in Kumasi to jollof tables in Takoradi  Shito has always been there. Now Nkor brings it to your doorstep, never compromising, never cutting corners.
                 </p>
               </div>
 
