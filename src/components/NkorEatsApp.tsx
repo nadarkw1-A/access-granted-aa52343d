@@ -16,10 +16,14 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
-import nkor1 from '@/assets/nkor-1.png.asset.json';
-import nkor2 from '@/assets/nkor-2.png.asset.json';
-import nkor3 from '@/assets/nkor-3.png.asset.json';
-import nkor4 from '@/assets/nkor-45qkkf45qkkf45qk.png.asset.json';
+const productImages = [
+  '/nkor_Eats_Halal Beef_.png',
+  '/nkor_eats_halal_chicken.png',
+  '/Food_1.png',
+  '/Food_2.png',
+  '/Pour_1.png',
+  '/PIC_Hold.png'
+];
 
 const productImages = [nkor3.url, nkor2.url, nkor1.url, nkor4.url];
 const pickImg = (i: number) => productImages[i % productImages.length];
