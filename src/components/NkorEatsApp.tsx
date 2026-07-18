@@ -25,7 +25,6 @@ const productImages = [
   '/PIC_Hold.png'
 ];
 
-const productImages = [nkor3.url, nkor2.url, nkor1.url, nkor4.url];
 const pickImg = (i: number) => productImages[i % productImages.length];
 
 
