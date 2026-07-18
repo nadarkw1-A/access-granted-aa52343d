@@ -655,7 +655,9 @@ function CartDrawer({
     setErrorMessage(null);
     
     try {
-      const response = await fetch('/api/checkout', {
+      // Changed from '/api/checkout' to 'api/checkout' (without the leading slash)
+      // to prevent framework base-path routing issues
+      const response = await fetch('api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cartItems: cart }),
@@ -663,7 +665,7 @@ function CartDrawer({
 
       const data = await response.json();
       if (data.url) {
-        window.location.href = data.url; // Dynamic redirect straight to Stripe
+        window.location.href = data.url; 
       } else {
         console.error('Checkout error:', data.error);
         setErrorMessage(data.error || 'Failed to initiate checkout.');
