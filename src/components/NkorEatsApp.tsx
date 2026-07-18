@@ -16,20 +16,7 @@ import {
   ChevronDown,
   Sparkles,
 } from 'lucide-react';
-const productImages = [
-  '/nkor_eats_halal beef.png',
-  '/nkor_eats_halal_chicken.png',
-  '/food_1.png',
-  '/food_2.png',
-  'pepper_free.png'
-  '/pour_1.png',
-  '/pic_hold.png',
-  '/nkor_mild.png',
-  '/nkor_spicy.png',
-  '/nkor_veryhot.png'
-];
 
-const pickImg = (i: number) => productImages[i % productImages.length];
 
 
 // ============================================================================
