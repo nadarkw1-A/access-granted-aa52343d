@@ -1,5 +1,4 @@
-api/checkout.ts
- import { createAPIFileRoute } from '@tanstack/start/api';
+import { createAPIFileRoute } from '@tanstack/react-start/api';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -12,17 +11,18 @@ export const Route = createAPIFileRoute('/api/checkout')({
       const { cartItems } = await request.json();
 
       const lineItems = cartItems.map((item: any) => {
-        let basePrice = 1199; // $11.99 for 8 oz
-        if (item.size === '16 oz') basePrice = 1899;
-        if (item.size === '32 oz') basePrice = 2999;
+        // Safely extract price based on your CartItem interface variants structure
+        let basePrice = 1199; // Default 8 oz
+        if (item.variants?.size === '16 oz') basePrice = 1899;
+        if (item.variants?.size === '32 oz') basePrice = 2999;
 
         return {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: `${item.name} (${item.size || '8 oz'})`,
-              description: `Topping: ${item.proteinVariant || 'Plain (No Meat)'}`,
-              images: [item.image ? `${new URL(request.url).origin}${item.image}` : ''],
+              name: `${item.product?.name || 'Nkor Shito Sauce'} (${item.variants?.size || '8 oz'})`,
+              description: `Topping: ${item.variants?.protein || 'Plain (No Meat)'}`,
+              images: [item.product?.image ? `${new URL(request.url).origin}${item.product.image}` : ''],
             },
             unit_amount: basePrice,
           },
