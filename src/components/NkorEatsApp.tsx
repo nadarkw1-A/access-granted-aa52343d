@@ -1084,6 +1084,7 @@ export default function NkorEatsApp() {
 
   return (
     <div className="min-h-screen bg-base-black" style={{ backgroundColor: '#0B0C10' }}>
+      <PaymentTestModeBanner />
       <Navigation
         cartCount={cartCount}
         cartTotal={cartTotal}
