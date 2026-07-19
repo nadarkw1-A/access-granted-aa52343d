@@ -653,14 +653,30 @@ function CartDrawer({
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
-    const shopifyUrl = import.meta.env.VITE_SHOPIFY_CHECKOUT_URL as string | undefined;
-    if (!shopifyUrl) {
-      setErrorMessage('Checkout is not configured yet. Please add your Shopify checkout URL.');
+
+    const unmapped: string[] = [];
+    const parts: string[] = [];
+    for (const item of cart) {
+      const productMap = SHOPIFY_VARIANT_MAP[item.product.id];
+      const variantId = productMap?.[item.variants.size]?.[item.variants.protein];
+      if (!variantId) {
+        unmapped.push(`${item.product.name} (${item.variants.size} · ${item.variants.protein})`);
+        continue;
+      }
+      parts.push(`${variantId}:${item.quantity}`);
+    }
+
+    if (unmapped.length > 0) {
+      setErrorMessage(
+        `These items aren't available for checkout yet: ${unmapped.join(', ')}. Please remove them to continue.`
+      );
       return;
     }
+    if (parts.length === 0) return;
+
     setErrorMessage(null);
     setIsSubmitting(true);
-    window.location.href = shopifyUrl;
+    window.location.href = `https://${SHOPIFY_DOMAIN}/cart/${parts.join(',')}`;
   };
 
   if (!isOpen) return null;
