@@ -81,6 +81,26 @@ function generateCartItemId(productId: string, variants: SelectedVariants): stri
 }
 
 // ============================================================================
+// SHOPIFY CHECKOUT — variant permalink map
+// ============================================================================
+
+const SHOPIFY_DOMAIN = 'yi9t3h-1e.myshopify.com';
+
+// Maps app product id -> size -> protein -> Shopify variant id
+const SHOPIFY_VARIANT_MAP: Record<string, Partial<Record<SizeVariant, Partial<Record<ProteinVariant, string>>>>> = {
+  'shito-pepper-free': {
+    '8 oz':  { 'Plain (No Meat)': '41312413286464', 'Chicken': '41312092356672', 'Halal Beef': '41312092389440' },
+    '16 oz': { 'Plain (No Meat)': '41312413319232', 'Chicken': '41312092422208', 'Halal Beef': '41312092454976' },
+    '32 oz': { 'Plain (No Meat)': '41312413352000', 'Chicken': '41312092487744', 'Halal Beef': '41312092520512' },
+  },
+  'shito-mild': {
+    '8 oz':  { 'Plain (No Meat)': '41312413384768', 'Chicken': '41312413417536', 'Halal Beef': '41312413450304' },
+    '16 oz': { 'Plain (No Meat)': '41312413483072', 'Chicken': '41312413515840', 'Halal Beef': '41312413548608' },
+    '32 oz': { 'Plain (No Meat)': '41312413581376', 'Chicken': '41312413614144', 'Halal Beef': '41312413646912' },
+  },
+};
+
+// ============================================================================
 // PRODUCT DATA — 6 Shito Sauce varieties
 // ============================================================================
 
@@ -653,14 +673,30 @@ function CartDrawer({
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
-    const shopifyUrl = import.meta.env.VITE_SHOPIFY_CHECKOUT_URL as string | undefined;
-    if (!shopifyUrl) {
-      setErrorMessage('Checkout is not configured yet. Please add your Shopify checkout URL.');
+
+    const unmapped: string[] = [];
+    const parts: string[] = [];
+    for (const item of cart) {
+      const productMap = SHOPIFY_VARIANT_MAP[item.product.id];
+      const variantId = productMap?.[item.variants.size]?.[item.variants.protein];
+      if (!variantId) {
+        unmapped.push(`${item.product.name} (${item.variants.size} · ${item.variants.protein})`);
+        continue;
+      }
+      parts.push(`${variantId}:${item.quantity}`);
+    }
+
+    if (unmapped.length > 0) {
+      setErrorMessage(
+        `These items aren't available for checkout yet: ${unmapped.join(', ')}. Please remove them to continue.`
+      );
       return;
     }
+    if (parts.length === 0) return;
+
     setErrorMessage(null);
     setIsSubmitting(true);
-    window.location.href = shopifyUrl;
+    window.location.href = `https://${SHOPIFY_DOMAIN}/cart/${parts.join(',')}`;
   };
 
   if (!isOpen) return null;
