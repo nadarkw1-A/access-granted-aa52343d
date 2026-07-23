@@ -108,6 +108,17 @@ const SHOPIFY_VARIANT_MAP: Record<string, Partial<Record<SizeVariant, Partial<Re
     '16 oz': { 'Plain (No Meat)': '41312414072896', 'Chicken': '41312414105664', 'Halal Beef': '41312414138432' },
     '32 oz': { 'Plain (No Meat)': '41312414171200', 'Chicken': '41312414203968', 'Halal Beef': '41312414236736' },
   },
+  'shito-halal-chicken': {
+    '8 oz':  { 'Plain (No Meat)': '41312414302272', 'Chicken': '41312414335040', 'Halal Beef': '41312414367808' },
+    '16 oz': { 'Plain (No Meat)': '41312414400576', 'Chicken': '41312414433344', 'Halal Beef': '41312414466112' },
+    '32 oz': { 'Plain (No Meat)': '41312414498880', 'Chicken': '41312414531648', 'Halal Beef': '41312414564416' },
+  },
+  'shito-halal-beef': {
+    '8 oz':  { 'Plain (No Meat)': '41312414597184', 'Chicken': '41312414629952', 'Halal Beef': '41312414662720' },
+    '16 oz': { 'Plain (No Meat)': '41312414695488', 'Chicken': '41312414728256', 'Halal Beef': '41312414761024' },
+    '32 oz': { 'Plain (No Meat)': '41312414793792', 'Chicken': '41312414826560', 'Halal Beef': '41312414859328' },
+  },
+
 
 };
 
